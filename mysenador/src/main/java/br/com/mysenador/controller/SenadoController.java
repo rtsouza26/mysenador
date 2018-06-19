@@ -45,18 +45,18 @@ public class SenadoController {
 	@RequestMapping("/")
 	public ModelAndView index(){
 		
-		ModelAndView model = new ModelAndView("/tables");
+		ModelAndView model = new ModelAndView("/index");
 		String xml = requesturl.toString(url);
 		senado = xmlapi.converte(xml);
 		parlamentar1.clear();
-		//for(int i = 0;i<81;i++){
-		//	parlamentar1.add(senado.getParlamentares().get(i));
-		//}
-		identificacao=null;
-		identificacao =  (List<IdentificacaoParlamentar>) idsalva.findAll();
+		for(int i = 0;i<81;i++){
+			parlamentar1.add(senado.getParlamentares().get(i));
+		}
+		//identificacao=null;
+		//identificacao =  (List<IdentificacaoParlamentar>) idsalva.findAll();
 		
 		
-		 model.addObject("Parl",identificacao);
+		 model.addObject("Parl",parlamentar1);
 	
 		return model;
 		
