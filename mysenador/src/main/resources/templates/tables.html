@@ -223,11 +223,11 @@ License: http://creativecommons.org/licenses/MIT
 						<tr th:each="parl:${Parl}">
 							<td class="readonly check"><input name="check1"
 								type="checkbox" /></td>
-							<td><span th:text="${parl.IdentificacaoParlamentar.NomeParlamentar}"></span></td>
-							<td><span th:text="${parl.IdentificacaoParlamentar.SexoParlamentar}"></span></td>
-							<td><span th:text="${parl.IdentificacaoParlamentar.EmailParlamentar}"></span></td>
-							<td><span th:text="${parl.IdentificacaoParlamentar.SiglaPartidoParlamentar}"></span></td>
-                            <td><span th:text="${parl.IdentificacaoParlamentar.UfParlamentar}"></span></td>
+							<td><span th:text="${parl.NomeParlamentar}"></span></td>
+							<td><span th:text="${parl.SexoParlamentar}"></span></td>
+							<td><span th:text="${parl.EmailParlamentar}"></span></td>
+							<td><span th:text="${parl.SiglaPartidoParlamentar}"></span></td>
+                            <td><span th:text="${parl.UfParlamentar}"></span></td>
 							<td class="tcontrols"><a href="#" class="smallbtn"><img
 									src="img/table/view.png" alt="" /></a></td>
 							<td class="tcontrols"><a href="#" class="smallbtn"><img
