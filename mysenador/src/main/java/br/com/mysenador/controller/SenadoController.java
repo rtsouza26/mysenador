@@ -26,7 +26,6 @@ public class SenadoController {
 	List<IdentificacaoParlamentar>identificacao = new ArrayList<IdentificacaoParlamentar>();
 	List<Mandato>mandato = new ArrayList<Mandato>();
 	List<Titular>titular = new ArrayList<Titular>();
-	
 	List<Parlamentar>parlamentar1 = new ArrayList<Parlamentar>();
 	String url ="http://legis.senado.leg.br/dadosabertos/senador/lista/atual";
 	HtmlRequest requesturl = new HtmlRequest();
@@ -47,11 +46,17 @@ public class SenadoController {
 	public ModelAndView index(){
 		
 		ModelAndView model = new ModelAndView("/tables");
+		String xml = requesturl.toString(url);
+		senado = xmlapi.converte(xml);
+		parlamentar1.clear();
+		for(int i = 0;i<81;i++){
+			parlamentar1.add(senado.getParlamentares().get(i));
+		}
 		identificacao=null;
 		identificacao =  (List<IdentificacaoParlamentar>) idsalva.findAll();
 		
 		
-		 model.addObject("Parl",identificacao);
+		 model.addObject("Parl",parlamentar1);
 	
 		return model;
 		
