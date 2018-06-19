@@ -52,8 +52,8 @@ public class SenadoController {
 		for(int i = 0;i<81;i++){
 			parlamentar1.add(senado.getParlamentares().get(i));
 		}
-		identificacao=null;
-		identificacao =  (List<IdentificacaoParlamentar>) idsalva.findAll();
+	//	identificacao=null;
+	//	identificacao =  (List<IdentificacaoParlamentar>) idsalva.findAll();
 		
 		
 		 model.addObject("Parl",parlamentar1);
