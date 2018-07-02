@@ -1,21 +1,27 @@
 package br.com.mysenador.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.mysenador.model.*;
 import br.com.mysenador.util.*;
 import br.com.mysenador.extractor.*;
 import br.com.mysenador.repository.*;
 
-@Controller
-
+@RestController
 public class SenadoController {
 
 	List<IdentificacaoParlamentar>identificacao = new ArrayList<IdentificacaoParlamentar>();
@@ -37,6 +43,7 @@ public class SenadoController {
 	
 	IdentificacaoParlamentar id;
 
+	@CrossOrigin(origins = {"http://localhost:8100","http://localhost:8080"})
 	@RequestMapping("/")
 	public ModelAndView index(){
 		
@@ -57,16 +64,26 @@ public class SenadoController {
 		
 	
 	}
+	
+	@CrossOrigin(origins = {"http://localhost:8100","http://localhost:8080"})
 	@RequestMapping("/api/senators/all")
 	public String indexapi(Model model){
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> map = new HashMap<>();
 		
-		String xml = requesturl.toString(url);
-		senado = xmlapi.converte(xml);
-		String desconverte = xmlapi.desconvertejson(senado);
-		
-		model.addAttribute("descon",desconverte);
-		
-		return "index1";
+		try {
+			String xml = requesturl.toString(url);
+			senado = xmlapi.converte(xml);
+			String desconverte = xmlapi.desconvertejson(senado);
+			
+			model.addAttribute("descon",desconverte);
+			map.put("senators", senado);
+			return mapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 		
 		
 	}
